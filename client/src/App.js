@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import Jumbotron from "./components/Jumbotron";
-import {FormBtn} from "./components/Form";
+import FormBtn from "./components/FormBtn";
 import './App.css';
 
 
@@ -27,29 +27,23 @@ class App extends Component {
   handleClick = (event) => {
     event.preventDefault();
     console.log("August");
-
     console.log(this.state);
-
   };
 
 
   render() {
-    return (
-      <React.Fragment>
+    return <React.Fragment>
         <Jumbotron />
-        <form className='container'>
 
-        <input className='' type='text' name='title' onChange={this.handleChange }value={this.state.title} />
-        <input className='' type='text' name='begin' onChange={this.handleChange} value={this.state.begin} />
-         <input className='' type='text' name='end' onChange={this.handleChange} value={this.state.end} />
+        <form className="container form-group">
+          <input className="form-control" type="text" name="title" onChange={this.handleChange} value={this.state.title} />
+          <input className="form-control" type="text" name="begin" onChange={this.handleChange} value={this.state.begin} />
+          <input className="form-control" type="text" name="end" onChange={this.handleChange} value={this.state.end} />
+          <FormBtn onClick={this.handleClick} />
+        </form>
 
-
-          <FormBtn onClick={this.handleClick}/>
-        </form >
-      </React.Fragment>
-
-
-    );
+        
+      </React.Fragment>;
   }
 }
 
