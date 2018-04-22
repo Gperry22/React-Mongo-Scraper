@@ -23,9 +23,6 @@ export default{
   saveArticle: (data) => {
     console.log('11111122222', data);   
     return axios.post("/api/article/", data);
-  },
-  // Get Saved Articles
-  getArticleSaved: () => {
-    return axios.get("/api/article/saved");
-  },
+  }
+
 }

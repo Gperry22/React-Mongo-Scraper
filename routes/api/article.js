@@ -13,9 +13,6 @@ router.route("/:id")
   .delete(articleController.remove);
 
 
-router.route("/saved")
-  .get(articleController.findAllSave)
-
 module.exports = router;
 
 

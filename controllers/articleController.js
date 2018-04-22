@@ -4,8 +4,8 @@ const db = require("../models");
 module.exports = {
   findAll: function(req, res) {
     db.Article.find(req.query)
-      .sort({ date: -1 })
-      .then(dbModel => res.json(dbModel))
+      // .sort({ date: -1 })
+      .then((dbModel) => res.json(dbModel))
       .catch(err => res.status(422).json(err));
   },
   findById: function(req, res) {
@@ -28,12 +28,12 @@ module.exports = {
       .then(dbModel => dbModel.remove())
       .then(dbModel => res.json(dbModel))
       .catch(err => res.status(422).json(err));
-  },
-  findAllSave: function (req, res) {
-    db.Article.find({ saved: true })
-      .then(dbModel => res.json(dbModel))
-      .catch(err => res.status(422).json(err));
-  },
+  }
+  // findAllSave: function (req, res) {
+  //   db.Article.find({ saved: true })
+  //     .then(dbModel => res.json(dbModel))
+  //     .catch(err => res.status(422).json(err));
+  // },
 };
 
 
