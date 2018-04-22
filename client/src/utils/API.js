@@ -1,15 +1,3 @@
-import axios from 'axios';
-
-const URL = "https://api.nytimes.com/svc/search/v2/articlesearch.json?";
-
-export default {
-    search: function(query) {
-        return axios.get(URL + query)
-    }
-}
-
-
-
 import axios from "axios";
 
 export default{
