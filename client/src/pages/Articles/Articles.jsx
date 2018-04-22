@@ -12,10 +12,29 @@ class Articles extends Component {
 
     state = {
         articles: [],
+        savedArticles: [],
         searchTerm: "",
         startYear: "",
         endYear: ""
     }
+
+
+    componentDidMount() {
+        this.loadArticles();
+    }
+
+    // Loads all books  and sets them to this.state.books
+    loadArticles = () => {
+        API.getArticleSaved()
+            .then(res => {
+                this.setState({
+                    savedArticles: res.data.response.docs
+                })
+                console.log(this.state.savedArticles);
+            })
+            .catch(err => console.log(err));
+    };
+
 
 
     handleChange = (event) => {
@@ -26,7 +45,6 @@ class Articles extends Component {
         })
         console.log(this.state);
     }
-
 
 
 
@@ -46,10 +64,28 @@ class Articles extends Component {
     };
 
 
-    
+
+ 
+    // When the form is submitted, use the API.saveBook method to save the book data
+    // Then reload books from the database
     saveArticle = id => {
-        console.log("SAVED");
-    }
+
+        const Art = this.state.articles.find(article => article._id === id);
+        console.log(Art);
+              
+        API.saveArticle({
+            articleID: Art._id,
+            title: Art.headline.main,
+            author: Art.byline.original,
+            snippet: Art.snippet,
+            url: Art.web_url,
+            saved: true
+        })
+                .then(res => this.loadArticles())
+                .catch(err => console.log(err));    
+    };
+
+
 
 
     render() {
@@ -76,7 +112,7 @@ class Articles extends Component {
                                 return (
                                     <React.Fragment>
                                         <Col size="10" key={article._id}>
-                                            <h3 className=''>{article.headline.main}</h3> by <h4 className=''>{article.byline.original}</h4>
+                                            <h3 className=''>{article.headline.main}</h3> <h4 className=''>{article.byline.original}</h4>
                                             <p className=''>{article.snippet}</p>
                                             <a href={article.web_url} target="_blank">WEBURL</a>
                                         </Col>
